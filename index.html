@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xuân Gắn Kết - Tết Yêu Thương 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Montserrat:wght@700;900&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Nunito', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                        script: ['Dancing Script', 'cursive'],
+                    },
+                    colors: {
+                        'youth-blue': '#1e3a8a',
+                        'youth-light': '#3b82f6',
+                        'warm-orange': '#f97316',
+                        'warm-yellow': '#fbbf24',
+                        'tet-red': '#dc2626',
+                        'dark-bg': '#0f172a', 
+                        'dark-card': '#1e293b', 
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'spin-slow': 'spin 8s linear infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        /* Hiệu ứng hoa rơi */
+        .petal {
+            position: absolute;
+            background-color: #ffc0cb;
+            border-radius: 150% 0 150% 0;
+            animation: fall linear infinite;
+            z-index: 10;
+            opacity: 0.8;
+        }
+
+        @keyframes fall {
+            0% { transform: translate(0, -10vh) rotate(0deg) scale(0.8); opacity: 1; }
+            100% { transform: translate(20vw, 105vh) rotate(360deg) scale(0.5); opacity: 0; }
+        }
+
+        .blob {
+            position: absolute;
+            filter: blur(50px);
+            z-index: -1;
+            opacity: 0.5;
+            transition: all 0.5s ease;
+        }
+
+        /* Dark mode transitions */
+        body, .bg-white, .text-gray-800 {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Text Glow Effect */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(220, 38, 38, 0.5);
+        }
+        .dark .text-glow {
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.6);
+        }
+
+        /* Hiệu ứng Fade */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.5s ease-out forwards;
+        }
+        
+        /* Loading Spinner */
+        .loader {
+            border: 3px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 3px solid #fff;
+            width: 20px;
+            height: 20px;
+            -webkit-animation: spin 1s linear infinite; /* Safari */
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans relative overflow-x-hidden dark:bg-dark-bg dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Container cho hiệu ứng hoa rơi -->
+    <div id="petals-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
+
+    <!-- Decorative Blobs (Background) -->
+    <div class="blob bg-red-300 dark:bg-red-900/30 w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2"></div>
+    <div class="blob bg-yellow-200 dark:bg-yellow-900/30 w-80 h-80 rounded-full bottom-0 right-0 translate-x-1/2 translate-y-1/2"></div>
+
+    <!-- 1. NAVIGATION -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-white/80 dark:bg-dark-bg/80 backdrop-blur-md shadow-sm border-b border-transparent dark:border-gray-800" id="navbar">
+        <div class="w-full px-6 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2 flex-shrink-0">
+                <div class="relative w-10 h-10 flex items-center justify-center">
+                    <div class="absolute inset-0 bg-tet-red rounded-full animate-pulse-slow"></div>
+                    <i class="fas fa-heart text-white relative z-10 text-lg"></i>
+                </div>
+                <div>
+                    <span class="block font-heading font-bold text-tet-red dark:text-red-400 leading-none text-lg">LIÊN CHI ĐOÀN</span>
+                    <span class="block text-xs text-warm-orange dark:text-yellow-400 font-bold tracking-[0.2em]">KHOA HỌC LIÊN NGÀNH - NGOẠI NGỮ - TIN HỌC</span>
+                </div>
+            </div>
+
+            <!-- Desktop Menu (Centered) -->
+            <div class="hidden md:flex items-center gap-8 font-semibold text-sm absolute left-1/2 transform -translate-x-1/2">
+                <a onclick="scrollToHome()" href="#home" class="hover:text-tet-red dark:hover:text-yellow-400 transition cursor-pointer">Trang chủ</a>
+                <a href="#about" class="hover:text-tet-red dark:hover:text-yellow-400 transition">Về dự án</a>
+                <a href="#donate" class="hover:text-tet-red dark:hover:text-yellow-400 transition">Quyên góp</a>
+                <a href="#contact" class="hover:text-tet-red dark:hover:text-yellow-400 transition">Liên hệ</a>
+            </div>
+
+            <!-- Actions: Dark Mode & Donate Button -->
+            <div class="flex items-center gap-3 flex-shrink-0">
+                <!-- Dark Mode Toggle -->
+                <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition focus:outline-none" title="Chế độ Sáng/Tối">
+                    <i class="fas fa-moon text-gray-600 dark:hidden"></i>
+                    <i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
+                </button>
+
+                <button onclick="scrollToDonate()" class="hidden md:flex bg-gradient-to-r from-tet-red to-red-600 text-white px-5 py-2 rounded-full font-bold shadow-lg hover:shadow-red-500/30 transition transform hover:-translate-y-1 items-center gap-2">
+                    <span>Ủng hộ ngay</span> <i class="fas fa-heart text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. HERO SECTION -->
+    <header id="home" class="relative pt-32 pb-24 px-6 overflow-hidden">
+        <!-- Background Pattern Overlay -->
+        <div class="absolute inset-0 z-0 opacity-10 dark:opacity-5 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        
+        <div class="container mx-auto relative z-10 flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20">
+            <!-- Text Content -->
+            <div class="lg:w-1/2 space-y-8 text-center lg:text-left animate-fade-in-up">
+                
+                <div class="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/50 text-tet-red dark:text-red-300 px-4 py-1.5 rounded-full text-sm font-bold border border-red-200 dark:border-red-800 shadow-sm">
+                    <i class="fas fa-sparkles text-yellow-500"></i>
+                    <span>Chiến dịch Xuân Tình Nguyện 2026</span>
+                </div>
+
+                <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-black leading-normal tracking-tight">
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-tet-red to-orange-600 dark:from-red-400 dark:to-yellow-400 text-glow filter drop-shadow-sm py-2">
+                        XUÂN GẮN KẾT
+                    </span> <br>
+                    <span class="font-script text-6xl md:text-7xl text-gray-800 dark:text-white relative inline-block mt-2">
+                        Tết Yêu Thương
+                        <!-- Underline decoration -->
+                        <svg class="absolute w-full h-4 -bottom-2 left-0 text-tet-red dark:text-yellow-500 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none">
+                            <path d="M0 5 Q 50 15 100 5" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round"/>
+                        </svg>
+                    </span>
+                </h1>
+                
+                <p class="text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-medium">
+                    "Trao đi yêu thương để nhận lại nụ cười." <br class="hidden md:block">
+                    Cùng chúng tôi mang <strong>200 phần quà Tết</strong> đến với trẻ em nghèo và các hộ gia đình khó khăn vùng cao.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
+                    <button onclick="scrollToDonate()" class="group relative px-8 py-4 bg-tet-red text-white rounded-2xl font-bold text-lg shadow-xl shadow-red-500/20 hover:shadow-red-500/40 transition-all overflow-hidden">
+                        <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                        <span class="relative flex items-center gap-2">
+                            Quyên góp ngay <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                    </button>
+                    <a href="#about" class="px-8 py-4 bg-white dark:bg-transparent border-2 border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-2xl font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-tet-red dark:hover:border-red-400 hover:text-tet-red dark:hover:text-red-400 transition-colors">
+                        Xem chi tiết
+                    </a>
+                </div>
+                
+                <!-- Quick Stats with Icons -->
+                <div class="flex gap-8 lg:gap-12 justify-center lg:justify-start pt-8 border-t border-gray-200 dark:border-gray-700 mt-6">
+                    <div class="text-center lg:text-left">
+                        <div class="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                            <i class="fas fa-gift text-warm-orange text-xl"></i>
+                            <span class="block text-3xl font-black text-gray-900 dark:text-white">200+</span>
+                        </div>
+                        <span class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Phần quà dự kiến</span>
+                    </div>
+                    <div class="text-center lg:text-left">
+                        <div class="flex items-center gap-2 justify-center lg:justify-start mb-1">
+                            <i class="fas fa-calendar-check text-tet-red text-xl"></i>
+                            <span class="block text-3xl font-black text-gray-900 dark:text-white">2026</span>
+                        </div>
+                        <span class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Xuân Gắn Kết</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image (Organic Shape Mask) -->
+            <div class="lg:w-1/2 relative">
+                <!-- Decorative Elements behind image -->
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-red-200 to-yellow-100 dark:from-red-900/40 dark:to-yellow-900/40 rounded-full blur-3xl opacity-60"></div>
+                
+                <div class="relative z-10 animate-float">
+                    <!-- Main Image with Blob Mask CSS -->
+                    <div class="relative overflow-hidden rounded-[2rem] lg:rounded-[3rem] shadow-2xl border-4 border-white dark:border-gray-700 transform rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://i.ex-cdn.com/vntravellive.com/files/editor2/2020/09/01/4934-tet-doc-lap-tren-reo-cao-tay-bac-093408.jpg" alt="Xuân Tình Nguyện" class="w-full h-[400px] lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700">
+                        
+                        <!-- Overlay gradient on image -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none"></div>
+                        <div class="absolute bottom-6 left-6 text-white">
+                            <p class="font-script text-2xl mb-1">Trao yêu thương</p>
+                            <p class="font-bold uppercase tracking-widest text-sm">Mùa xuân 2026</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -top-6 -right-6 bg-white dark:bg-dark-card p-4 rounded-2xl shadow-xl z-20 animate-bounce-slow border border-gray-100 dark:border-gray-600">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-full bg-yellow-100 dark:bg-yellow-900/50 flex items-center justify-center text-yellow-600 dark:text-yellow-400">
+                                <i class="fas fa-hand-holding-heart text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase">Vừa quyên góp</p>
+                                <p class="text-sm font-bold text-gray-800 dark:text-white">Anthony Ngô <span class="text-green-500">+500k</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. PROJECT DETAIL (THE WHY) -->
+    <section id="about" class="py-16 bg-white dark:bg-dark-card transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="font-heading text-3xl font-bold text-tet-red dark:text-red-400 mb-4">Ý Nghĩa Chương Trình</h2>
+                <p class="text-gray-600 dark:text-gray-300">Khi đất trời vào xuân, đó không chỉ là khoảnh khắc khởi đầu của một năm mới, mà còn là lúc những tấm lòng cùng hướng về nhau bằng sự quan tâm và sẻ chia chân thành. Mang theo tinh thần ấy, hành trình thiện nguyện “Xuân gắn kết – Tết yêu thương” 2026 chính thức được khởi động, với mong muốn đem hơi ấm mùa xuân đến với những mảnh đời còn nhiều khó khăn tại xã Đông Tâm, tỉnh Tuyên Quang.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-red-50 dark:bg-gray-800 rounded-2xl p-6 text-center hover:shadow-lg transition group">
+                    <div class="w-16 h-16 bg-red-100 dark:bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-red-600 dark:text-red-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 dark:text-white">Sẻ Chia</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Mang Tết ấm đến với những mảnh đời bất hạnh, khó khăn.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-orange-50 dark:bg-gray-800 rounded-2xl p-6 text-center hover:shadow-lg transition group">
+                    <div class="w-16 h-16 bg-orange-100 dark:bg-orange-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-orange-600 dark:text-orange-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 dark:text-white">Gắn Kết</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Kết nối cộng đồng, lan tỏa tinh thần tương thân tương ái.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-yellow-50 dark:bg-gray-800 rounded-2xl p-6 text-center hover:shadow-lg transition group">
+                    <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl text-yellow-600 dark:text-yellow-400 group-hover:scale-110 transition-transform">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3 class="font-bold text-xl mb-2 dark:text-white">Hy Vọng</h3>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Thắp sáng niềm tin vào một năm mới 2026 bình an, hạnh phúc.</p>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- 4. DONATION SECTION (MAIN FEATURE) -->
+    <section id="donate" class="py-20 bg-gradient-to-b from-gray-50 to-red-50 dark:from-dark-bg dark:to-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-10">
+                <span class="text-warm-orange dark:text-yellow-500 font-bold uppercase tracking-widest text-sm">Chung tay đóng góp</span>
+                <h2 class="font-heading text-4xl font-black text-gray-900 dark:text-white mt-2">Phương Thức Ủng Hộ</h2>
+            </div>
+
+            <!-- Toggle Switch -->
+            <div class="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6 mb-8">
+                <button onclick="switchTab('cash')" id="btn-cash" class="px-8 py-3 rounded-full font-bold text-base transition-all bg-tet-red text-white shadow-xl border-2 border-tet-red transform scale-105">
+                    <i class="fas fa-money-bill-wave mr-2"></i>Tiền mặt / Chuyển khoản
+                </button>
+                <button onclick="switchTab('items')" id="btn-items" class="px-8 py-3 rounded-full font-bold text-base text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border-2 border-transparent transition-all hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-200 dark:hover:border-gray-600 shadow-sm">
+                    <i class="fas fa-box-open mr-2"></i>Hiện vật / Đồ dùng
+                </button>
+            </div>
+
+            <!-- CARD DUY NHẤT -->
+            <div id="donation-card" class="max-w-4xl mx-auto bg-white dark:bg-dark-card rounded-3xl shadow-2xl overflow-hidden min-h-[500px] border-t-4 border-tet-red transition-all duration-300">
+                
+                <!-- TAB 1: CASH / TRANSFER -->
+                <div id="tab-cash" class="tab-content active p-8 md:p-12 animate-fade-in-up">
+                    <div class="flex flex-col md:flex-row gap-10">
+                        <!-- QR Code Area -->
+                        <div class="md:w-1/2 flex flex-col items-center justify-center bg-red-50 dark:bg-gray-800 p-6 rounded-2xl border-2 border-dashed border-red-200 dark:border-gray-600">
+                            <h3 class="font-bold text-lg text-tet-red dark:text-red-400 mb-4">Quét mã QR (VietQR)</h3>
+                            <div class="bg-white p-2 rounded-xl shadow-lg mb-4 relative group">
+                                <!-- Dynamic QR Code for Techcombank -->
+                                <img src="https://img.vietqr.io/image/970407-920820069999-compact2.jpg?accountName=TRAN%20THI%20ANH%20THU&amount=0&addInfo=UNG%20HO%20XUAN%20GAN%20KET%202026" alt="QR Code Techcombank" class="w-48 h-48 object-contain">
+                                <div class="absolute inset-0 bg-white/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-xl">
+                                    <span class="text-xs font-bold text-red-600 text-center">Techcombank<br>920820069999</span>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 text-center">Mở ứng dụng ngân hàng để quét</p>
+                        </div>
+
+                        <!-- Form Area -->
+                        <div class="md:w-1/2 space-y-5">
+                            <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-xl border border-gray-100 dark:border-gray-700">
+                                <h3 class="font-bold text-xl text-gray-800 dark:text-white mb-3 border-b dark:border-gray-700 pb-2">Thông tin tài khoản</h3>
+                                <div class="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-500 dark:text-gray-400">Ngân hàng:</span>
+                                        <strong class="text-tet-red dark:text-red-400 font-bold text-right">Techcombank</strong>
+                                    </div>
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-gray-500 dark:text-gray-400">Số tài khoản:</span>
+                                        <div class="text-right">
+                                            <strong class="text-gray-800 dark:text-white text-lg block select-all">920820069999</strong>
+                                        </div>
+                                    </div>
+                                    <div class="flex justify-between">
+                                        <span class="text-gray-500 dark:text-gray-400">Chủ tài khoản:</span>
+                                        <strong class="text-gray-800 dark:text-white text-right uppercase">TRẦN THỊ ANH THƯ</strong>
+                                    </div>
+                                    <div class="mt-2 bg-yellow-50 dark:bg-yellow-900/20 p-3 rounded-lg border border-yellow-100 dark:border-yellow-900/30">
+                                        <span class="text-gray-500 dark:text-gray-400 text-xs block mb-1">Nội dung chuyển khoản:</span>
+                                        <strong class="text-gray-800 dark:text-gray-200 text-xs break-words block select-all">[Họ & Tên] + UNG HO CHUONG TRINH XUAN GAN KET TET YEU THUONG 2026</strong>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button onclick="copyToClipboard('920820069999')" class="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white font-bold py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition mb-3">
+                                    <i class="far fa-copy mr-2"></i>Sao chép Số tài khoản
+                                </button>
+                                <button onclick="alert('Cảm ơn tấm lòng vàng của bạn! Chúng tôi sẽ cập nhật danh sách sớm nhất.')" class="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition">
+                                    Gửi xác nhận đã chuyển
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: IN-KIND DONATION (HIỆN VẬT) -->
+                <div id="tab-items" class="tab-content hidden p-8 md:p-12">
+                    <div class="text-center mb-8">
+                        <h3 class="font-bold text-2xl text-gray-800 dark:text-white">Vật phẩm Quyên góp</h3>
+                        <p class="text-gray-500 dark:text-gray-400">Các phần quà Tết thiết thực cho bà con và các em nhỏ</p>
+                    </div>
+
+                    <!-- Items Grid -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <!-- Item 1 -->
+                        <label class="cursor-pointer group relative">
+                            <input type="checkbox" name="donation_item" class="peer sr-only" value="Bánh chưng/Tét">
+                            <div class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500 peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-gray-700 transition text-center h-full flex flex-col items-center justify-center">
+                                <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">🥮</div>
+                                <span class="font-bold text-sm text-gray-700 dark:text-gray-200">Bánh chưng/Tét</span>
+                            </div>
+                            <div class="absolute top-2 right-2 text-orange-500 opacity-0 peer-checked:opacity-100"><i class="fas fa-check-circle"></i></div>
+                        </label>
+                         <!-- Item 2 -->
+                         <label class="cursor-pointer group relative">
+                            <input type="checkbox" name="donation_item" class="peer sr-only" value="Gạo">
+                            <div class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500 peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-gray-700 transition text-center h-full flex flex-col items-center justify-center">
+                                <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">🍚</div>
+                                <span class="font-bold text-sm text-gray-700 dark:text-gray-200">Gạo</span>
+                            </div>
+                            <div class="absolute top-2 right-2 text-orange-500 opacity-0 peer-checked:opacity-100"><i class="fas fa-check-circle"></i></div>
+                        </label>
+                         <!-- Item 3 -->
+                         <label class="cursor-pointer group relative">
+                            <input type="checkbox" name="donation_item" class="peer sr-only" value="Nhu yếu phẩm">
+                            <div class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500 peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-gray-700 transition text-center h-full flex flex-col items-center justify-center">
+                                <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">🧂</div>
+                                <span class="font-bold text-sm text-gray-700 dark:text-gray-200">Nhu yếu phẩm</span>
+                            </div>
+                            <div class="absolute top-2 right-2 text-orange-500 opacity-0 peer-checked:opacity-100"><i class="fas fa-check-circle"></i></div>
+                        </label>
+                         <!-- Item 4 -->
+                         <label class="cursor-pointer group relative">
+                            <input type="checkbox" name="donation_item" class="peer sr-only" value="Phần quà khác">
+                            <div class="p-4 rounded-xl border-2 border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800 hover:border-orange-400 dark:hover:border-orange-500 peer-checked:border-orange-500 peer-checked:bg-orange-50 dark:peer-checked:bg-gray-700 transition text-center h-full flex flex-col items-center justify-center">
+                                <div class="text-4xl mb-2 group-hover:scale-110 transition-transform">🎁</div>
+                                <span class="font-bold text-sm text-gray-700 dark:text-gray-200">Phần quà khác</span>
+                            </div>
+                            <div class="absolute top-2 right-2 text-orange-500 opacity-0 peer-checked:opacity-100"><i class="fas fa-check-circle"></i></div>
+                        </label>
+                    </div>
+
+                    <!-- Item Form -->
+                    <form name="submit-to-google-sheet" onsubmit="handleItemDonation(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input name="name" id="d-name" required type="text" placeholder="Họ và tên" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
+                            <input name="phone" id="d-phone" required type="text" placeholder="Số điện thoại" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
+                        </div>
+                        <input name="address" id="d-address" required type="text" placeholder="Địa chỉ lấy hàng (nếu số lượng lớn)" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
+                        <textarea name="note" id="d-note" placeholder="Ghi chú thêm (VD: Số lượng cụ thể, thời gian có thể nhận...)" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500 h-24"></textarea>
+                        
+                        <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex justify-center items-center">
+                            <span>Đăng ký gửi hiện vật</span>
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FOOTER -->
+    <footer id="contact" class="bg-gray-900 text-white pt-16 pb-8 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-12 border-b border-gray-800 pb-12">
+                <div>
+                    <h4 class="font-heading font-bold text-xl mb-4 text-warm-orange">Về Chiến Dịch</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        LCĐ Khoa Khoa học Liên ngành Ngoại ngữ Tin học tin rằng, mỗi sự chung tay – dù là nhỏ nhất – đều có thể góp phần thắp lên hy vọng, mang đến niềm vui và tiếp thêm động lực cho những người đang cần được sẻ chia. “Xuân gắn kết – Tết yêu thương” không chỉ là một chuyến đi, mà là hành trình của trách nhiệm, của tình người và của những giá trị bền lâu được lan tỏa bằng hành động thiết thực.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-xl mb-4 text-warm-orange">Liên Hệ Trực Tiếp</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex gap-2">
+                            <i class="fas fa-map-marker-alt w-6 text-center mt-1"></i> 
+                            <span>Học viện Hành chính và Quản trị công – Cơ sở 36 Xuân La, Tây Hồ, Hà Nội.</span>
+                        </li>
+                        <li class="flex gap-2"><i class="fas fa-phone w-6 text-center mt-1"></i> <span>Hotline: 0338963077 - Đ/c Huỳnh Cẩm Thu – Phó Bí thư LCĐ</span></li>
+                        <li class="flex gap-2"><i class="fas fa-envelope w-6 text-center mt-1"></i> <span>meomeocute1004@gmail.com</span></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-heading font-bold text-xl mb-4 text-warm-orange">Mạng Xã Hội</h4>
+                    <p class="text-gray-400 text-sm mb-4">Theo dõi hành trình của chúng tôi tại:</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.facebook.com/doanhoikhlnnnth" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-blue-500 transition" title="Ghé thăm Fanpage Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.facebook.com/photo.php?fbid=1951676929034489&set=a.104912147044319&type=3" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-full bg-pink-600 flex items-center justify-center hover:bg-pink-500 transition" title="Ghé thăm Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center pt-8 text-gray-600 text-xs">
+                © 2026 Xuân Gắn Kết - Tết Yêu Thương - Designed with <i class="fas fa-heart text-red-500"></i> by Anthony Ngô.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPT LOGIC -->
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDgYmcOpvKGeXweUjrGUPM8ml71POZ_NkVkTqC4P--bXgGZK8V29tGMd2cduvnZ2ocSQ/exec";
+
+        // 1. Dark Mode
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // 2. Tab Switching
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.add('hidden');
+                tab.classList.remove('animate-fade-in-up'); // Remove animation class to reset
+            });
+            
+            const selectedTab = document.getElementById(`tab-${tabName}`);
+            selectedTab.classList.remove('hidden');
+            
+            void selectedTab.offsetWidth; 
+            selectedTab.classList.add('animate-fade-in-up');
+
+            const btnCash = document.getElementById('btn-cash');
+            const btnItems = document.getElementById('btn-items');
+            const card = document.getElementById('donation-card');
+
+            const inactiveClasses = "px-8 py-3 rounded-full font-bold text-base text-gray-600 dark:text-gray-300 bg-white dark:bg-gray-800 border-2 border-transparent transition-all hover:bg-gray-50 dark:hover:bg-gray-700 hover:border-gray-200 dark:hover:border-gray-600 shadow-sm";
+
+            if (tabName === 'cash') {
+                card.classList.remove('border-warm-orange');
+                card.classList.add('border-tet-red');
+
+                btnCash.className = "px-8 py-3 rounded-full font-bold text-base transition-all bg-tet-red text-white shadow-xl border-2 border-tet-red transform scale-105";
+                btnItems.className = inactiveClasses;
+            } else {
+                card.classList.remove('border-tet-red');
+                card.classList.add('border-warm-orange');
+
+                btnItems.className = "px-8 py-3 rounded-full font-bold text-base transition-all bg-warm-orange text-white shadow-xl border-2 border-warm-orange transform scale-105";
+                btnCash.className = inactiveClasses;
+            }
+        }
+
+        // 3. Handle Item Donation (Gửi về Google Sheets)
+        function handleItemDonation(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="loader"></div> Đang gửi...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            const form = document.forms['submit-to-google-sheet'];
+            const formData = new FormData(form);
+            
+            const checkedItems = [];
+            document.querySelectorAll('input[name="donation_item"]:checked').forEach(checkbox => {
+                checkedItems.push(checkbox.value);
+            });
+            const itemsString = checkedItems.length > 0 ? checkedItems.join(', ') : 'Chưa chọn vật phẩm';
+            formData.append('items', itemsString); // Thêm vào formData gửi đi
+
+            // Gửi dữ liệu (Fetch API)
+            if (GOOGLE_SCRIPT_URL === "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE") {
+                alert("Lỗi: Bạn chưa dán link Google Script vào code. Vui lòng kiểm tra lại phần hướng dẫn.");
+                resetButton(btn, originalText);
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => {
+                    alert("Đã gửi thành công! Cảm ơn tấm lòng vàng của bạn.");
+                    form.reset();
+                    resetButton(btn, originalText);
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau.");
+                    resetButton(btn, originalText);
+                });
+        }
+
+        function resetButton(btn, originalText) {
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            btn.classList.remove('opacity-70', 'cursor-not-allowed');
+        }
+
+        // 4. Falling Petals Effect
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            
+            const size = Math.random() * 10 + 5 + 'px';
+            const left = Math.random() * 100 + 'vw';
+            const duration = Math.random() * 3 + 2 + 's';
+            const delay = Math.random() * 5 + 's';
+            const color = Math.random() > 0.5 ? '#ffc0cb' : '#ffd700';
+
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = left;
+            petal.style.animationDuration = duration;
+            petal.style.animationDelay = delay;
+            petal.style.backgroundColor = color;
+
+            document.getElementById('petals-container').appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 8000);
+        }
+
+        setInterval(createPetal, 300);
+
+        function scrollToHome() {
+            document.getElementById('home').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function scrollToDonate() {
+            document.getElementById('donate').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Đã sao chép số tài khoản: ' + text);
+            });
+        }
+        
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
+</body>
+</html>
