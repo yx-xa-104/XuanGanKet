@@ -420,7 +420,7 @@
                             </div>
                             <div>
                                 <p class="text-xs text-gray-500 dark:text-gray-400 font-bold uppercase">Vừa quyên góp</p>
-                                <p class="text-sm font-bold text-gray-800 dark:text-white">Anthony Ngô <span class="text-green-500">+500k</span></p>
+                                <p class="text-sm font-bold text-gray-800 dark:text-white"><span id="badge-donor-name">Mạnh Thường Quân</span> <span id="badge-donor-amount" class="text-green-500"></span></p>
                             </div>
                         </div>
                     </div>
@@ -714,7 +714,7 @@
                 </div>
             </div>
             <div class="text-center pt-8 text-gray-500 dark:text-gray-400 text-xs">
-                © 2026 Xuân Gắn Kết - Tết Yêu Thương <i class="fas fa-heart text-red-500"></i>
+                © 2026 Xuân Gắn Kết - Tết Yêu Thương <i class="fas fa-heart text-red-500"></i> ngô sybau
             </div>
         </div>
     </footer>
@@ -1100,6 +1100,18 @@
 
             donorsList.innerHTML = html;
             totalAmountEl.textContent = totalAmount.toLocaleString('vi-VN');
+
+            //  Auto Update Floating Badge
+            if (data.length > 0) {
+                const latestDonor = data[0];
+                const badgeName = document.getElementById('badge-donor-name');
+                const badgeAmount = document.getElementById('badge-donor-amount');
+                
+                if (badgeName && badgeAmount) {
+                    badgeName.textContent = latestDonor.name;
+                    badgeAmount.textContent = '+' + parseInt(latestDonor.amount).toLocaleString('vi-VN');
+                }
+            }
         }
 
         setInterval(loadDonorsList, 30000);
