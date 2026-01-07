@@ -203,12 +203,12 @@
         <div class="w-full px-4 md:px-6 py-3 flex justify-between items-center">
             <!-- Logo -->
             <div class="flex items-center gap-2 flex-shrink-0 min-w-0">
-                <div class="relative w-14 h-14 flex items-center justify-center flex-shrink-0">
+                <div class="relative w-14 h-14 hidden md:flex items-center justify-center flex-shrink-0">
                     <img src="source/Logo khoa.png" alt="Logo Khoa" class="w-full h-full object-contain">
                 </div>
-                <div class="hidden sm:block">
-                    <span class="block font-heading font-bold text-tet-red dark:text-red-400 leading-none text-base md:text-lg">LIÊN CHI ĐOÀN - LIÊN CHI HỘI</span>
-                    <span class="block text-xs text-warm-orange dark:text-yellow-400 font-bold tracking-[0.1em] md:tracking-[0.2em] whitespace-nowrap overflow-hidden text-ellipsis">KHOA HỌC LIÊN NGÀNH - NGOẠI NGỮ - TIN HỌC</span>
+                <div class="block ml-2 max-w-[200px] sm:max-w-none">
+                    <span class="block font-heading font-bold text-tet-red dark:text-red-400 leading-tight text-xs sm:text-base md:text-lg">LIÊN CHI ĐOÀN - LIÊN CHI HỘI</span>
+                    <span class="block text-[0.6rem] sm:text-xs text-warm-orange dark:text-yellow-400 font-bold tracking-wider sm:tracking-[0.1em] md:tracking-[0.2em] whitespace-nowrap text-ellipsis">KHOA HỌC LIÊN NGÀNH - NGOẠI NGỮ - TIN HỌC</span>
                 </div>
             </div>
 
@@ -223,16 +223,7 @@
             <!-- Actions: Dark Mode & Logos & Donate Button -->
             <div class="flex items-center gap-2 md:gap-3 flex-shrink-0">
                 <!-- Logos Section (Mobile & Tablet) -->
-                <div class="flex md:hidden items-center gap-1.5">
-                    <!-- Đoàn Thanh Niên Logo -->
-                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-Doan-Thanh-NIen-Cong-San-Ho-Chi-Minh-1.png" alt="Đoàn Thanh Niên" class="h-8 object-contain hover:opacity-80 transition" title="Đoàn Thanh Niên Cộng Sản">
-                    
-                    <!-- Hội Sinh Viên Logo -->
-                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoi-Sinh-Vien-Viet-Nam.png" alt="Hội Sinh Viên" class="h-8 object-contain hover:opacity-80 transition" title="Hội Sinh Viên Việt Nam">
-                    
-                    <!-- Học Viện Logo -->
-                    <img src="https://apag.edu.vn/Content/publishing_home/imgAPAG/logo%20bottom.png" alt="APAG" class="h-8 object-contain hover:opacity-80 transition" title="Học viện Hành chính và Quản trị công">
-                </div>
+                <!-- Logos Section (Mobile & Tablet) REMOVED -->
 
                 <!-- Dark Mode Toggle -->
                 <button onclick="toggleDarkMode()" class="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-200 dark:hover:bg-gray-600 transition focus:outline-none" title="Chế độ Sáng/Tối">
@@ -283,6 +274,14 @@
                 <button onclick="closeMobileMenu(); scrollToDonate()" class="w-full mt-4 bg-gradient-to-r from-tet-red to-red-600 text-white px-4 py-3 rounded-lg font-bold shadow-lg hover:shadow-red-500/30 transition transform hover:-translate-y-1 flex items-center justify-center gap-2">
                     <i class="fas fa-heart text-xs"></i> <span>Ủng hộ ngay</span>
                 </button>
+                
+                <!-- Logos Section (Moved to Menu) -->
+                <div class="flex items-center justify-center gap-4 mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+                    <img src="source/Logo khoa.png" alt="Logo Khoa" class="h-12 object-contain hover:opacity-80 transition" title="Khoa Học liên ngành - Ngoại ngữ - Tin học">
+                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/11/Logo-Doan-Thanh-NIen-Cong-San-Ho-Chi-Minh-1.png" alt="Đoàn Thanh Niên" class="h-11 object-contain hover:opacity-80 transition" title="Đoàn Thanh Niên Cộng Sản">
+                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2021/10/Logo-Hoi-Sinh-Vien-Viet-Nam.png" alt="Hội Sinh Viên" class="h-9 object-contain hover:opacity-80 transition" title="Hội Sinh Viên Việt Nam">
+                    <img src="https://apag.edu.vn/Content/publishing_home/imgAPAG/logo%20bottom.png" alt="APAG" class="h-10 object-contain hover:opacity-80 transition" title="Học viện Hành chính và Quản trị công">
+                </div>
             </div>
         </div>
     </nav>
@@ -303,7 +302,7 @@
                 
                 <div class="inline-flex items-center gap-2 bg-red-100 dark:bg-red-900/50 text-tet-red dark:text-red-300 px-4 py-1.5 rounded-full text-sm font-bold border border-red-200 dark:border-red-800 shadow-sm">
                     <i class="fas fa-sparkles text-yellow-500"></i>
-                    <span>Chiến dịch Xuân Tình Nguyện 2026</span>
+                    <span>Chiến dịch Bếp ăn cho em 2026</span>
                 </div>
 
                 <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl font-black leading-normal tracking-tight">
