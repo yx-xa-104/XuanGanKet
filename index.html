@@ -188,7 +188,7 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans relative overflow-x-hidden dark:bg-dark-bg dark:text-gray-100 transition-colors duration-300 m-0 p-0">
 
-    <!-- Container hiệu ứng hoa rơi -->
+    <!-- Container hoa rơi -->
     <div id="petals-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
     <!-- Decorative Blobs  -->
@@ -468,6 +468,51 @@
         </div>
     </section>
 
+    <!-- 3.5. DONORS LIST SECTION -->
+    <section id="donors" class="py-20 bg-white dark:bg-dark-bg transition-colors">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-warm-orange dark:text-yellow-500 font-bold uppercase tracking-widest text-sm">Danh sách</span>
+                <h2 class="font-heading text-4xl font-black text-gray-900 dark:text-white mt-2 mb-4">Mạnh Thường Quân</h2>
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-gradient-to-r from-red-100 to-orange-100 dark:from-red-900/30 dark:to-orange-900/30 rounded-2xl p-6 border border-red-200 dark:border-red-900/50">
+                        <div class="flex items-center justify-center gap-3 mb-2">
+                            <i class="fas fa-coins text-warm-orange text-2xl"></i>
+                            <span class="text-3xl font-black text-tet-red dark:text-red-400" id="total-amount">0</span>
+                            <span class="text-gray-600 dark:text-gray-400 font-bold">VNĐ</span>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Tổng số tiền đã nhận</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Donors Table -->
+            <div class="max-w-4xl mx-auto">
+                <div class="overflow-x-auto rounded-2xl shadow-lg border border-gray-100 dark:border-gray-700">
+                    <table class="w-full">
+                        <thead class="bg-gradient-to-r from-tet-red to-red-600 text-white">
+                            <tr>
+                                <th class="px-6 py-4 text-left font-bold uppercase tracking-wide text-sm">#</th>
+                                <th class="px-6 py-4 text-left font-bold uppercase tracking-wide text-sm">Tên Người Chuyển</th>
+                                <th class="px-6 py-4 text-right font-bold uppercase tracking-wide text-sm">Số Tiền</th>
+                                <th class="px-6 py-4 text-left font-bold uppercase tracking-wide text-sm">Lời Nhắn</th>
+                                <th class="px-6 py-4 text-center font-bold uppercase tracking-wide text-sm">Ngày</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donors-list" class="divide-y divide-gray-100 dark:divide-gray-700">
+                            <tr class="bg-gray-50 dark:bg-gray-800/50 hover:bg-gray-100 dark:hover:bg-gray-800 transition">
+                                <td colspan="5" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                    <i class="fas fa-spinner fa-spin text-xl mb-2 block"></i>
+                                    Đang tải dữ liệu...
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 4. DONATION SECTION -->
     <section id="donate" class="py-20 bg-gradient-to-b from-gray-50 to-red-50 dark:from-dark-bg dark:to-gray-900">
         <div class="container mx-auto px-6">
@@ -535,9 +580,24 @@
                                 <button onclick="copyToClipboard('920820069999')" class="w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-white font-bold py-2 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-600 transition mb-3">
                                     <i class="far fa-copy mr-2"></i>Sao chép Số tài khoản
                                 </button>
-                                <button onclick="alert('Cảm ơn tấm lòng vàng của bạn! Chúng tôi sẽ cập nhật danh sách sớm nhất.')" class="w-full bg-gradient-to-r from-red-500 to-orange-500 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition">
-                                    Gửi xác nhận đã chuyển
-                                </button>
+                            </div>
+
+                            <!-- Form Xác nhận chuyển khoản -->
+                            <div class="bg-green-50 dark:bg-green-900/20 p-4 rounded-xl border border-green-100 dark:border-green-900/30 mt-4">
+                                <h4 class="font-bold text-green-900 dark:text-green-400 mb-3 flex items-center gap-2">
+                                    <i class="fas fa-check-circle"></i>Xác nhận đã chuyển khoản
+                                </h4>
+                                <form name="submit-to-google-sheet-money" onsubmit="handleMoneyDonation(event)" class="space-y-3">
+                                    <div class="grid grid-cols-2 gap-2">
+                                        <input name="name" id="m-name" required type="text" placeholder="Tên người chuyển" class="custom-input w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white text-sm focus:outline-none focus:border-orange-500">
+                                        <input name="phone" id="m-phone" required type="text" placeholder="Số điện thoại" class="custom-input w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white text-sm focus:outline-none focus:border-orange-500">
+                                    </div>
+                                    <input name="amount" id="m-amount" required type="number" placeholder="Số tiền đã chuyển (VNĐ)" class="custom-input w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white text-sm focus:outline-none focus:border-orange-500" min="1">
+                                    <textarea name="message" id="m-message" placeholder="Lời nhắn (tùy chọn)" class="custom-input w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white text-sm focus:outline-none focus:border-orange-500 h-20 resize-none"></textarea>
+                                    <button type="submit" id="submit-money-btn" class="w-full bg-gradient-to-r from-green-500 to-emerald-500 text-white font-bold py-2 rounded-lg shadow-lg hover:shadow-xl transition text-sm">
+                                        <i class="fas fa-check mr-2"></i>Xác nhận chuyển khoản
+                                    </button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -659,7 +719,7 @@
 
     <!-- SCRIPT LOGIC -->
     <script>
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyDgYmcOpvKGeXweUjrGUPM8ml71POZ_NkVkTqC4P--bXgGZK8V29tGMd2cduvnZ2ocSQ/exec";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwvJ2hCRIt5aYI-WTDTUfAVIsK0oVqgg4xsH92SPKUGj1HpE5NsEkzUX5aW-wGLtERhQg/exec";
 
         // Dark Mode
         function toggleDarkMode() {
@@ -778,7 +838,7 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.add('hidden');
-                tab.classList.remove('animate-fade-in-up'); // Remove animation class to reset
+                tab.classList.remove('animate-fade-in-up');
             });
             
             const selectedTab = document.getElementById(`tab-${tabName}`);
@@ -826,7 +886,11 @@
                 checkedItems.push(checkbox.value);
             });
             const itemsString = checkedItems.length > 0 ? checkedItems.join(', ') : 'Chưa chọn vật phẩm';
-            formData.append('items', itemsString); // Thêm vào formData gửi đi
+            formData.append('items', itemsString);
+            
+            // Add type and status for items donation
+            formData.append('type', 'items');
+            formData.append('status', 'Pending');
 
             // Gửi dữ liệu (Fetch API)
             if (GOOGLE_SCRIPT_URL === "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE") {
@@ -836,10 +900,58 @@
             }
 
             fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData })
-                .then(response => {
-                    alert("Đã gửi thành công! Cảm ơn tấm lòng vàng của bạn.");
-                    form.reset();
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert("Đã gửi thành công! Cảm ơn tấm lòng vàng của bạn.");
+                        form.reset();
+                        resetButton(btn, originalText);
+                    } else {
+                        throw new Error(data.error || 'Unknown error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    alert("Có lỗi xảy ra khi gửi. Vui lòng thử lại sau.");
                     resetButton(btn, originalText);
+                });
+        }
+
+        // 5. Handle Money Donation (Chuyển khoản)
+        function handleMoneyDonation(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submit-money-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<div class="loader"></div> Đang gửi...';
+            btn.disabled = true;
+            btn.classList.add('opacity-70', 'cursor-not-allowed');
+
+            const form = document.forms['submit-to-google-sheet-money'];
+            const formData = new FormData(form);
+            
+            // Add type parameter to indicate this is money donation
+            formData.append('type', 'money');
+            formData.append('status', 'Pending');
+
+            // Gửi dữ liệu (Fetch API)
+            if (GOOGLE_SCRIPT_URL === "PASTE_YOUR_GOOGLE_SCRIPT_URL_HERE") {
+                alert("Lỗi: Bạn chưa dán link Google Script vào code. Vui lòng kiểm tra lại phần hướng dẫn.");
+                resetButton(btn, originalText);
+                return;
+            }
+
+            fetch(GOOGLE_SCRIPT_URL, { method: 'POST', body: formData })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.result === 'success') {
+                        alert("Đã gửi thành công! Cảm ơn tấm lòng vàng của bạn.");
+                        form.reset();
+                        resetButton(btn, originalText);
+                        setTimeout(loadDonorsList, 1000);
+                    } else {
+                        throw new Error(data.error || 'Unknown error');
+                    }
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
@@ -911,7 +1023,84 @@
                     }
                 });
             }
+            loadDonorsList();
         });
+
+        // 6. Load Donors List from Google Sheet
+        function loadDonorsList() {
+            // Gọi Google Apps Script để lấy danh sách những người đã duyệt
+            fetch(GOOGLE_SCRIPT_URL)
+                .then(response => response.json())
+                .then(data => {
+                    // Script trả về format: { result: "success", data: [...] }
+                    if (data.result === 'success' && data.data) {
+                        displayDonors(data.data);
+                    } else {
+                        throw new Error('Invalid response format');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading donors:', error);
+                    document.getElementById('donors-list').innerHTML = `
+                        <tr class="bg-gray-50 dark:bg-gray-800/50">
+                            <td colspan="5" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                                <i class="fas fa-exclamation-circle text-xl mb-2 block"></i>
+                                Không thể tải dữ liệu. Vui lòng thử lại sau.
+                            </td>
+                        </tr>
+                    `;
+                });
+        }
+
+        function displayDonors(data) {
+            const donorsList = document.getElementById('donors-list');
+            const totalAmountEl = document.getElementById('total-amount');
+            
+            if (!data || data.length === 0) {
+                donorsList.innerHTML = `
+                    <tr class="bg-gray-50 dark:bg-gray-800/50">
+                        <td colspan="5" class="px-6 py-8 text-center text-gray-500 dark:text-gray-400">
+                            <i class="fas fa-inbox text-xl mb-2 block"></i>
+                            Chưa có mạnh thường quân nào được duyệt
+                        </td>
+                    </tr>
+                `;
+                totalAmountEl.textContent = '0';
+                return;
+            }
+
+            let totalAmount = 0;
+            let html = '';
+
+            data.forEach((donor, index) => {
+                const amount = parseInt(donor.amount) || 0;
+                totalAmount += amount;
+                
+                const date = new Date(donor.date).toLocaleDateString('vi-VN');
+                const message = donor.message || '-';
+                
+                html += `
+                    <tr class="bg-white dark:bg-gray-800/30 hover:bg-gray-50 dark:hover:bg-gray-800/60 transition border-b border-gray-100 dark:border-gray-700">
+                        <td class="px-6 py-4 font-bold text-gray-700 dark:text-gray-300">${index + 1}</td>
+                        <td class="px-6 py-4">
+                            <span class="font-semibold text-gray-900 dark:text-white">${donor.name}</span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <span class="font-bold text-lg text-green-600 dark:text-green-400">${amount.toLocaleString('vi-VN')}</span>
+                        </td>
+                        <td class="px-6 py-4 text-gray-600 dark:text-gray-400 text-sm max-w-xs truncate" title="${message}">
+                            ${message}
+                        </td>
+                        <td class="px-6 py-4 text-center text-sm text-gray-500 dark:text-gray-400">${date}</td>
+                    </tr>
+                `;
+            });
+
+            donorsList.innerHTML = html;
+            totalAmountEl.textContent = totalAmount.toLocaleString('vi-VN');
+        }
+
+        setInterval(loadDonorsList, 30000);
     </script>
 </body>
 
