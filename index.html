@@ -188,7 +188,7 @@
 </head>
 <body class="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans relative overflow-x-hidden dark:bg-dark-bg dark:text-gray-100 transition-colors duration-300 m-0 p-0">
 
-    <!-- Container cho hiệu ứng hoa rơi -->
+    <!-- Container hiệu ứng hoa rơi -->
     <div id="petals-container" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
 
     <!-- Decorative Blobs  -->
@@ -596,7 +596,13 @@
                             <input name="name" id="d-name" required type="text" placeholder="Họ và tên" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
                             <input name="phone" id="d-phone" required type="text" placeholder="Số điện thoại" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
                         </div>
-                        <input name="address" id="d-address" required type="text" placeholder="Địa chỉ lấy hàng (nếu số lượng lớn)" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500">
+                        <div>
+                            <label class="flex items-center gap-2 mb-2 cursor-pointer">
+                                <input type="checkbox" id="address-toggle" class="w-4 h-4 rounded border-gray-300 accent-orange-500">
+                                <span class="text-gray-700 dark:text-gray-300 font-medium">Nhập địa chỉ lấy hàng (nếu số lượng lớn)</span>
+                            </label>
+                            <input name="address" id="d-address" type="text" placeholder="Địa chỉ lấy hàng (nếu số lượng lớn)" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500 disabled:bg-gray-100 dark:disabled:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
+                        </div>
                         <textarea name="note" id="d-note" placeholder="Ghi chú thêm (VD: Số lượng cụ thể, thời gian có thể nhận...)" class="custom-input w-full px-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-700 dark:text-white focus:outline-none focus:border-orange-500 h-24"></textarea>
                         
                         <button type="submit" id="submit-btn" class="w-full bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-3 rounded-xl shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5 flex justify-center items-center">
@@ -888,6 +894,24 @@
                 alert('Đã sao chép số tài khoản: ' + text);
             });
         }
+
+        // 5. Handle Address Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const addressToggle = document.getElementById('address-toggle');
+            const addressInput = document.getElementById('d-address');
+            
+            if (addressToggle && addressInput) {
+                addressToggle.addEventListener('change', function() {
+                    if (this.checked) {
+                        addressInput.disabled = false;
+                        addressInput.focus();
+                    } else {
+                        addressInput.disabled = true;
+                        addressInput.value = '';
+                    }
+                });
+            }
+        });
     </script>
 </body>
 
